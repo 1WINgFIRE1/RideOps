@@ -1,0 +1,134 @@
+# What L1 should check before escalating or closing, per category.
+# Plain text on purpose: the support lead can edit this without touching code.
+#   required_info  -> engineering needs these to investigate (missing = "Insufficient info" returns)
+#   config_checks  -> settings L1 can verify and fix themselves (missing = "Config issue" returns)
+#   close_checks   -> confirm these before closing (missing = reopens)
+
+_default:
+  required_info:
+  - Client ID
+  - Affected employee or trip ID
+  - Date and time of the issue
+  - Screenshot or error text
+  config_checks:
+  - Client account settings for this feature
+  close_checks:
+  - Client confirmed the issue is resolved
+Roster / booking not syncing:
+  required_info:
+  - Client ID
+  - Shift date and shift time
+  - Booking or roster ID
+  - Number of employees affected
+  - Roster screenshot
+  config_checks:
+  - Booking cutoff time saved in client settings matches what the client expects
+  - Shift window is configured for the affected shift
+  - Ad-hoc booking is enabled for the admin's role
+  - Cancellation sync is on for the client
+  close_checks:
+  - Next roster run checked and correct
+  - Client confirmed employees now appear
+Live tracking / GPS incorrect:
+  required_info:
+  - Trip ID
+  - Driver and vehicle number
+  - Time window of wrong location
+  - Driver app version
+  - Screenshot of map
+  config_checks:
+  - Driver app has location permission set to "always"
+  - Security team / tracking link users are added to the client account
+  - Pickup geofence radius is set correctly
+  close_checks:
+  - Live location verified on a current trip
+  - Client confirmed tracking is correct
+Report export failing:
+  required_info:
+  - Report name
+  - Date range requested
+  - Format (Excel / PDF)
+  - Time of attempt
+  - Error text
+  config_checks:
+  - Date range is within the allowed limit (large ranges should use scheduled export)
+  - Scheduled report recipients and email address are correct
+  - User role has access to the reports module
+  close_checks:
+  - Report downloaded successfully by the client
+OTP / boarding issue:
+  required_info:
+  - Trip ID
+  - Employee ID
+  - Driver app version
+  - Time of boarding attempt
+  - Exact error shown
+  config_checks:
+  - Employee phone number is correct in the roster
+  - OTP boarding is enabled for the client
+  close_checks:
+  - Next trip boarded successfully
+Billing / invoice discrepancy:
+  required_info:
+  - Invoice number
+  - Billing period
+  - Trip IDs in dispute
+  - Expected vs charged amount
+  config_checks:
+  - Correct rate card / vendor is mapped to the client
+  - Toll and dead-km rules match the contract
+  close_checks:
+  - Revised invoice shared and accepted by client
+Cab delay / no-show complaint:
+  required_info:
+  - Trip ID
+  - Scheduled vs actual pickup time
+  - Driver and vehicle number
+  config_checks:
+  - Check whether this is a fleet / driver issue for the operations team rather than
+    a software issue
+  close_checks:
+  - Operations team actioned the driver issue
+  - Client informed of the outcome
+How-to / feature request:
+  required_info:
+  - Exact feature or workflow the client is asking about
+  config_checks:
+  - Check the help centre / known how-to answers before escalating
+  close_checks:
+  - Client confirmed the answer helped
+Login / access issue:
+  required_info:
+  - User email
+  - Role requested
+  - Error text
+  config_checks:
+  - User exists and has the right role
+  - Password reset / account unlock attempted
+  close_checks:
+  - User logged in successfully
+Employee address / geocode change:
+  required_info:
+  - Employee ID
+  - Old and new address
+  - Effective date
+  config_checks:
+  - New address saved and geocoded on the map
+  - Roster regenerated after the address change
+  close_checks:
+  - Next pickup uses the new address
+Driver / vehicle compliance docs:
+  required_info:
+  - Driver or vehicle ID
+  - Document type
+  - Expiry date shown
+  config_checks:
+  - Document uploaded and approved in the vendor portal
+  close_checks:
+  - Compliance status shows valid
+Adds pop-up/Un-wanted ads:
+  required_info: []
+  config_checks:
+  - Ads setting in app settings is off
+  close_checks:
+  - Client confirmed the issue is resolved

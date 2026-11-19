@@ -1,0 +1,27 @@
+[project]
+name = "rideops-precheck"
+version = "0.1.0"
+description = "L1 support pre-check tool for RideOps (case study v0)"
+requires-python = ">=3.12"
+dependencies = [
+    "altair>=6.3.0",
+    "fastembed>=0.9.1",
+    "polars>=2.1.0",
+    "pyyaml>=6.0.3",
+    "rapidfuzz>=3.14.6",
+    "streamlit>=1.67.0",
+]
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=2.10.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
